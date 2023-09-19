@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private Connection connect = Util.getConnection();
+    private static Connection connect = Util.getConnection();
     public UserDaoJDBCImpl() {
 
     }
