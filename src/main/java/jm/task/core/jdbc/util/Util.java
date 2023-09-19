@@ -1,11 +1,15 @@
 package jm.task.core.jdbc.util;
 
-import com.mysql.cj.x.protobuf.MysqlxNotice;
 import jm.task.core.jdbc.model.User;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.DriverManager;
+
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -13,14 +17,26 @@ public class Util {
     private static final String URL = "jdbc:mysql://localhost:3306/mydbtest";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
+    private static Connection connection;
     public static Connection getConnection(){
         try{
-           Connection connection = DriverManager.getConnection(URL,USER,PASSWORD);
+           connection = DriverManager.getConnection(URL,USER,PASSWORD);
             return connection;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public static void jdbcClose(){
+        try {
+            connection.close();
+            System.out.println("Соединение успешно закрыто");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public static Session getHib(){
         Properties prop = new Properties();
         prop.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/mydbtest");
