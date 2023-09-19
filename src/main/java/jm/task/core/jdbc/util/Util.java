@@ -20,7 +20,7 @@ public class Util {
     private static Connection connection;
     public static Connection getConnection(){
         try{
-           connection = DriverManager.getConnection(URL,USER,PASSWORD);
+            connection = DriverManager.getConnection(URL,USER,PASSWORD);
             return connection;
         } catch (SQLException e) {
             throw new RuntimeException(e);
