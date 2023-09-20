@@ -18,16 +18,17 @@ public class Util {
     private static final String USER = "root";
     private static final String PASSWORD = "root";
     private static Connection connection;
-    public static Connection getConnection(){
-        try{
-            connection = DriverManager.getConnection(URL,USER,PASSWORD);
+
+    public static Connection getConnection() {
+        try {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
             return connection;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void jdbcClose(){
+    public static void jdbcClose() {
         try {
             connection.close();
             System.out.println("Соединение успешно закрыто");
@@ -37,7 +38,7 @@ public class Util {
     }
 
 
-    public static Session getHib(){
+    public static Session getHib() {
         Properties prop = new Properties();
         prop.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/mydbtest");
         prop.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
